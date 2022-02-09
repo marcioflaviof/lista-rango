@@ -6,7 +6,7 @@ const Input = styled.input`
   background-position: center right;
   background-color: #fbfbfb;
   background-origin: content-box;
-  padding-right: 15px;
+  padding-right: 25px;
   padding-left: 20px;
   border: none;
   border-radius: 25px;
