@@ -10,6 +10,7 @@ const Container = styled.div`
   box-shadow: 0px 1px 2px #00000029;
   opacity: 1;
   align-items: center;
+  justify-content: center;
 `;
 
 const Status = styled.p`
@@ -18,12 +19,10 @@ const Status = styled.p`
   color: white;
 `;
 
-const CircleStatus = (status) => {
-  status = "Aberto agora";
-
+const CircleStatus = ({ status }) => {
   return (
     <Container>
-      <Status>{status}</Status>
+      <Status>{status ? "Aberto agora" : "Fechado"}</Status>
     </Container>
   );
 };

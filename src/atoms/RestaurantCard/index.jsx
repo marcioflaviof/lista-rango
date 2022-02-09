@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { CircleStatus } from "../CircleStatus";
 
 const Container = styled.div`
   display: flex;
@@ -6,10 +7,19 @@ const Container = styled.div`
   box-shadow: 0px 2px 4px #00000029;
   max-width: 365px;
   max-height: 100px;
+  margin: ${(props) => props.margin || 0};
+  position: relative;
+`;
+
+const StatusContainer = styled.div`
+  position: absolute;
+  top: -25px;
+  right: -25px;
 `;
 
 const TextContainer = styled.div`
-  margin-left: 25px;
+  margin-left: 15px;
+  padding-right: 15px;
 `;
 
 const Title = styled.h3`
@@ -21,9 +31,12 @@ const Address = styled.p`
   font-size: 0.75rem;
 `;
 
-const RestaurantCard = () => {
+const RestaurantCard = ({ margin }) => {
   return (
-    <Container>
+    <Container margin={margin}>
+      <StatusContainer>
+        <CircleStatus status />
+      </StatusContainer>
       <img src="/images/restaurant.png" alt="Logo do restaurante" />
       <TextContainer>
         <Title>Nome do Restaurante</Title>

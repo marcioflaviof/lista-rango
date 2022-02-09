@@ -14,12 +14,18 @@ const Input = styled.input`
   width: 840px;
   height: 40px;
   font-size: 1rem;
+  margin-top: ${(props) => props.marginTop || 0};
 `;
 
-const SearchBar = (placeholderText) => {
-  placeholderText = "Buscar Estabelecimento";
-
-  return <Input img="/images/search.svg" type="search" placeholder={placeholderText} />;
+const SearchBar = ({ placeholderText, marginTop }) => {
+  return (
+    <Input
+      img="/images/search.svg"
+      type="search"
+      placeholder={placeholderText}
+      marginTop={marginTop}
+    />
+  );
 };
 
 export { SearchBar };
