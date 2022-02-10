@@ -1,4 +1,6 @@
+import { useContext } from "react";
 import styled from "styled-components";
+import RestaurantContext from "../../../context/RestaurantContext";
 
 const Container = styled.div`
   display: flex;
@@ -6,6 +8,8 @@ const Container = styled.div`
   max-width: 695px;
   max-height: 145px;
   color: var(--gray-300);
+
+  ${(props) => ({ ...props.styles })}
 `;
 
 const DetailsContainer = styled.div`
@@ -13,22 +17,21 @@ const DetailsContainer = styled.div`
   flex-direction: column;
   max-width: 695px;
   max-height: 145px;
-  padding: 10px;
+  padding-left: 10px;
 `;
 
 const Title = styled.h1`
   font-size: 1.5rem;
-  margin: 0px;
+  margin-bottom: 5px;
 `;
 
 const Text = styled.p`
   font-size: 1rem;
-  margin: 10px 0;
+  margin-bottom: 5px;
 `;
 
 const TimeRange = styled.p`
   font-size: 0.75rem;
-  margin: 0px;
   & span {
     color: var(--black);
     font-weight: bold;
@@ -36,8 +39,8 @@ const TimeRange = styled.p`
 `;
 
 const FitImage = styled.div`
-  max-height: 145px;
-  max-width: 145px;
+  max-height: 165px;
+  max-width: 165px;
 
   & img {
     max-height: 100%;
@@ -45,28 +48,44 @@ const FitImage = styled.div`
   }
 `;
 
-const RestaurantHeader = () => {
+const RestaurantHeader = ({ styles }) => {
+  const { state } = useContext(RestaurantContext);
+
+  const { name, image, address, hours } = state;
+
   return (
-    <Container>
+    <Container styles={styles}>
       <FitImage>
-        <img src="/images/restaurant-big.png" alt="Icone do restaurante" />
+        <img src={image || "/images/restaurant-big.png"} alt="Icone do restaurante" />
       </FitImage>
 
       <DetailsContainer>
-        <Title>Nome Do Restaurante</Title>
-        <Text>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt et similique modi!
-          Necessitatibus similique
-        </Text>
-        <TimeRange>
-          Segunda a Sexta: <span>11:30 as 15:00</span>
-        </TimeRange>
-        <TimeRange>
-          Sabados: <span>11:30 as 15:00</span>
-        </TimeRange>
-        <TimeRange>
-          Domingos e Feriados: <span>11:30 as 15:00</span>
-        </TimeRange>
+        <Title>{name}</Title>
+        <Text>{address}</Text>
+        {Boolean(hours && hours.length) ? (
+          <>
+            <TimeRange>
+              Segunda a Sexta:{" "}
+              <span>
+                {hours[0].from} as {hours[0].to}
+              </span>
+            </TimeRange>
+            <TimeRange>
+              Sabados:{" "}
+              <span>
+                {hours[1].from} as {hours[1].to}
+              </span>
+            </TimeRange>
+            <TimeRange>
+              Domingos e Feriados:{" "}
+              <span>
+                {hours[1].from} as {hours[1].to}
+              </span>
+            </TimeRange>
+          </>
+        ) : (
+          <p>Em breve</p>
+        )}
       </DetailsContainer>
     </Container>
   );

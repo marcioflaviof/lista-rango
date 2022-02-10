@@ -1,3 +1,5 @@
+import { useContext } from "react";
+import RestaurantContext from "../../../context/RestaurantContext";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { CircleStatus } from "../CircleStatus";
@@ -43,6 +45,7 @@ const ImageContainer = styled.div`
     width: 100%;
     height: 100%;
     object-fit: fill;
+  }
 `;
 
 const TextContainer = styled.div`
@@ -59,9 +62,17 @@ const Address = styled.p`
   font-size: 0.75rem;
 `;
 
-const RestaurantCard = ({ margin, id, name, image, address }) => {
+const RestaurantCard = ({ restaurant, margin }) => {
+  const { setState } = useContext(RestaurantContext);
+
+  const { id, name, image, address, hours } = restaurant;
+
+  function handleClick() {
+    setState({ name, image, address, hours });
+  }
+
   return (
-    <StyledLink to={`/restaurant/${id}`}>
+    <StyledLink to={`/restaurant/${id}`} onClick={handleClick}>
       <Container margin={margin}>
         <StatusContainer>
           <CircleStatus status />

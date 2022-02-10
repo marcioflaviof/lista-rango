@@ -10,8 +10,10 @@ const Container = styled.div`
     justify-content: center;
     align-items: center;
     border-radius: 20px 0 0 20px;
-    box-shadow: 0px 2px 4px var(--gray-500);
+    box-shadow: -1px 2px 4px var(--gray-500);
   }
+
+  ${(props) => ({ ...props.styles })}
 `;
 
 const Input = styled.input`
@@ -24,15 +26,15 @@ const Input = styled.input`
   padding-left: 20px;
   border: none;
   border-radius: 0 20px 20px 0;
-  box-shadow: 0px 2px 4px var(--gray-500);
-  width: 625px;
+  box-shadow: 1px 2px 4px var(--gray-500);
+  width: 585px;
   height: 40px;
   font-size: 1rem;
 `;
 
-const MenuSearchBar = () => {
+const MenuSearchBar = ({ styles }) => {
   return (
-    <Container>
+    <Container styles={styles}>
       <div>
         <p>Buscar no cardápio</p>
       </div>

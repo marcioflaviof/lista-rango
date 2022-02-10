@@ -1,13 +1,16 @@
-import { Routes, Route } from "react-router";
-import { Home } from "./components/pages/Home";
-import { Restaurant } from "./components/pages/Restaurant";
+import { BrowserRouter } from "react-router-dom";
+import { Nav } from "./components/atoms/Nav";
+import GlobalContext from "./context/index";
+import Routes from "./routes";
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/restaurants/:id" component={<Restaurant />} />
-    </Routes>
+    <BrowserRouter>
+      <Nav />
+      <GlobalContext>
+        <Routes />
+      </GlobalContext>
+    </BrowserRouter>
   );
 }
 

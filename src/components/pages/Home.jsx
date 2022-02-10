@@ -1,7 +1,6 @@
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import styled from "styled-components";
 
-import { Nav } from "../atoms/Nav";
 import { FlexContainer } from "./utils/componentStyles";
 import { SearchBar } from "../atoms/SearchBar";
 import { RestaurantCard } from "../atoms/RestaurantCard";
@@ -21,7 +20,7 @@ const RestaurantContainer = styled.div`
   display: flex;
   flex-flow: row wrap;
   margin-top: 10px;
-  max-width: 90vw;
+  max-width: 1250px;
 `;
 
 function Home() {
@@ -39,20 +38,13 @@ function Home() {
 
   return (
     <Container>
-      <Nav />
       <Title>Bem-vindo ao Lista Rango</Title>
       <SearchBar placeholderText="Buscar estabelecimento" marginTop="40px" />
       <RestaurantContainer>
-        {restaurants.map(({ id, name, image, address }) => (
-          <>
-            <RestaurantCard
-              margin="30px 22.5px 0 22.5px"
-              id={id}
-              name={name}
-              image={image}
-              address={address}
-            />
-          </>
+        {restaurants.map((restaurant) => (
+          <Fragment key={restaurant.id}>
+            <RestaurantCard margin="30px 22.5px 0 22.5px" restaurant={restaurant} />
+          </Fragment>
         ))}
       </RestaurantContainer>
     </Container>

@@ -1,9 +1,10 @@
+import { useEffect } from "react";
 import styled from "styled-components";
 import { DishCard } from "../../atoms/DishCard";
 
 const Container = styled.div`
-  margin: 100px;
   max-width: 800px;
+  margin-top: 50px;
 `;
 
 const CategoriesContainer = styled.div`
@@ -41,21 +42,38 @@ const DishesContainer = styled.div`
   }
 `;
 
-const Categories = () => {
-  return (
-    <Container>
-      <CategoriesContainer>
-        <h3>Almoços</h3>
+const Categories = ({ dishes }) => {
+  const groups = dishes.map((dish) => dish.group);
 
-        <img src="/images/arrow.svg" alt="Clique para mostrar o conteudo" />
-      </CategoriesContainer>
-      <DishesContainer>
-        <DishCard />
-        <DishCard />
-        <DishCard />
-        <DishCard />
-      </DishesContainer>
-    </Container>
+  const uniqueGroups = [...new Set(groups)];
+
+  return (
+    <>
+      {uniqueGroups &&
+        uniqueGroups.map((group) => (
+          <Container key={group}>
+            <CategoriesContainer>
+              <h3>{group}</h3>
+
+              <img src="/images/arrow.svg" alt="Clique para mostrar o conteudo" />
+            </CategoriesContainer>
+            <DishesContainer>
+              {dishes.map((dish) => {
+                return (
+                  dish.group === group && (
+                    <DishCard
+                      key={dish.name}
+                      name={dish.name}
+                      image={dish.image}
+                      price={dish.price}
+                    />
+                  )
+                );
+              })}
+            </DishesContainer>
+          </Container>
+        ))}
+    </>
   );
 };
 

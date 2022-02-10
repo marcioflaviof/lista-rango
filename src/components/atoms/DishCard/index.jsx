@@ -3,8 +3,8 @@ import styled from "styled-components";
 const Container = styled.div`
   display: flex;
   align-items: center;
-  max-width: 385px;
-  max-height: 115px;
+  width: 385px;
+  height: 115px;
   box-shadow: 0px 4px 8px var(--gray-500);
 `;
 
@@ -50,21 +50,25 @@ const OldPrice = styled.p`
   text-decoration: line-through;
 `;
 
-const DishCard = () => {
+const DishCard = ({ name, image, price }) => {
   return (
     <Container>
       <ImageContainer>
-        <img src="/images/dish.png" alt="" />
+        <img src={image || "/images/dish.png"} alt="Imagem do prato" />
       </ImageContainer>
       <div>
         <div>
-          <Subtitle>Nome do Prato</Subtitle>
-          <Description>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do</Description>
+          <Subtitle>{name}</Subtitle>
+          <Description>Aprecie</Description>
         </div>
-        <PriceContainer>
-          <Price>R$ 19,90</Price>
-          <OldPrice>R$ 29,90</OldPrice>
-        </PriceContainer>
+        {price ? (
+          <PriceContainer>
+            <Price>R$ {price}</Price>
+            <OldPrice>R$ {price + 10}</OldPrice>
+          </PriceContainer>
+        ) : (
+          <p>Não disponível</p>
+        )}
       </div>
     </Container>
   );
