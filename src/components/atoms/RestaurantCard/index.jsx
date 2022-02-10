@@ -9,12 +9,27 @@ const Container = styled.div`
   height: 100px;
   margin: ${(props) => props.margin || 0};
   position: relative;
+
+  :hover {
+    cursor: pointer;
+  }
 `;
 
 const StatusContainer = styled.div`
   position: absolute;
   top: -25px;
   right: -25px;
+`;
+
+const ImageContainer = styled.div`
+  width: 100px;
+  height: 100px;
+
+  margin-right: 10px;
+  & img {
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
 `;
 
 const TextContainer = styled.div`
@@ -31,16 +46,20 @@ const Address = styled.p`
   font-size: 0.75rem;
 `;
 
-const RestaurantCard = ({ margin }) => {
+const RestaurantCard = ({ margin, name, image, address }) => {
   return (
     <Container margin={margin}>
       <StatusContainer>
         <CircleStatus status />
       </StatusContainer>
-      <img src="/images/restaurant.png" alt="Logo do restaurante" />
+
+      <ImageContainer>
+        <img src={image} alt="Logo do restaurante" />
+      </ImageContainer>
+
       <TextContainer>
-        <Title>Nome do Restaurante</Title>
-        <Address>Endereço do restaurante</Address>
+        <Title>{name}</Title>
+        <Address>{address}</Address>
       </TextContainer>
     </Container>
   );
