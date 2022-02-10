@@ -4,13 +4,13 @@ const Input = styled.input`
   background-image: url(${(props) => props.img});
   background-repeat: no-repeat;
   background-position: center right;
-  background-color: #fbfbfb;
+  background-color: var(--gray-100);
   background-origin: content-box;
   padding-right: 25px;
   padding-left: 20px;
   border: none;
   border-radius: 25px;
-  box-shadow: 0px 2px 4px #00000029;
+  box-shadow: 0px 2px 4px var(--gray-500);
   width: 840px;
   height: 40px;
   font-size: 1rem;

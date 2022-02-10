@@ -20,7 +20,7 @@ const RestaurantContainer = styled.div`
   display: flex;
   flex-flow: row wrap;
   margin-top: 10px;
-  max-width: 90vw;
+  max-width: 1265px;
 `;
 
 function App() {

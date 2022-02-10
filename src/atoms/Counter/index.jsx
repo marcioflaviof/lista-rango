@@ -4,7 +4,7 @@ const Container = styled.div`
   display: flex;
   width: 125px;
   height: 50px;
-  border: 1px solid #e6e6e6;
+  border: 1px solid var(--gray-200);
   border-radius: 4px;
 `;
 
@@ -16,14 +16,14 @@ const Button = styled.div`
   align-items: center;
   justify-content: center;
   font-weight: bold;
-  color: #009ca3;
+  color: var(--cyan);
   font-size: 1.25rem;
 `;
 
 const Input = styled.input`
   width: 25px;
   border: none;
-  color: #009ca3;
+  color: var(--cyan);
   font-size: 1.25rem;
 `;
 

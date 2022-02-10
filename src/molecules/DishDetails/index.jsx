@@ -64,7 +64,7 @@ const Price = styled.div`
     right: 0;
     font-weight: bold;
     font-size: 2rem;
-    color: #009ca3;
+    color: var(--cyan);
   }
 `;
 
@@ -74,7 +74,7 @@ const ButtonsContainer = styled.div`
   display: flex;
   justify-content: space-between;
   border-top: 1px solid;
-  border-color: #c2c2c2;
+  border-color: var(--gray-200);
 `;
 
 const DishDetails = () => {

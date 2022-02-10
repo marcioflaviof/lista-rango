@@ -5,7 +5,7 @@ const Container = styled.div`
   align-items: center;
   max-width: 695px;
   max-height: 145px;
-  color: #404040;
+  color: var(--gray-300);
 `;
 
 const DetailsContainer = styled.div`
@@ -30,7 +30,7 @@ const TimeRange = styled.p`
   font-size: 0.75rem;
   margin: 0px;
   & span {
-    color: black;
+    color: var(--black);
     font-weight: bold;
   }
 `;

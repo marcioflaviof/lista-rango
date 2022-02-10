@@ -4,9 +4,9 @@ import { CircleStatus } from "../CircleStatus";
 const Container = styled.div`
   display: flex;
   align-items: center;
-  box-shadow: 0px 2px 4px #00000029;
-  max-width: 365px;
-  max-height: 100px;
+  box-shadow: 0px 2px 4px var(--gray-500);
+  width: 365px;
+  height: 100px;
   margin: ${(props) => props.margin || 0};
   position: relative;
 `;

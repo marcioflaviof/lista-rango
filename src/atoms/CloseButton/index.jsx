@@ -5,7 +5,7 @@ const Container = styled.div`
   height: 50px;
   width: 50px;
   border-radius: 50%;
-  box-shadow: 0px 2px 4px #00000029;
+  box-shadow: 0px 2px 4px var(--gray-500);
   opacity: 1;
   align-items: center;
   justify-content: center;
@@ -15,7 +15,7 @@ const Container = styled.div`
 const Status = styled.p`
   font-size: 20px;
   font-weight: bold;
-  color: black;
+  color: var(--black);
   font-family: sans-serif;
 `;
 

@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
 const Container = styled.div`
-  background-color: #009ca3;
+  background-color: var(--cyan);
   width: 100vw;
   height: 60px;
-  box-shadow: 0px 4px 8px #00000029;
+  box-shadow: 0px 4px 8px var(--gray-500);
 `;
 
 const Nav = () => {

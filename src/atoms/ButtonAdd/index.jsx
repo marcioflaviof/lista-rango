@@ -4,10 +4,10 @@ const Button = styled.button`
   display: flex;
   height: 50px;
   width: 265px;
-  background-color: #009ca3;
+  background-color: var(--cyan);
   border: none;
   cursor: pointer;
-  color: #ffffff;
+  color: var(--white);
   font-size: 1.25rem;
   border-radius: 4px;
   align-items: center;

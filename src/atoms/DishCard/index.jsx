@@ -5,7 +5,7 @@ const Container = styled.div`
   align-items: center;
   max-width: 385px;
   max-height: 115px;
-  box-shadow: 0px 4px 8px #00000029;
+  box-shadow: 0px 4px 8px var(--gray-500);
 `;
 
 const ImageContainer = styled.div`
@@ -39,14 +39,14 @@ const PriceContainer = styled.div`
 
 const Price = styled.p`
   font-size: 1rem;
-  color: #009ca3;
+  color: var(--cyan);
   margin-right: 5px;
 `;
 
 const OldPrice = styled.p`
   font-size: 0.75rem;
   margin-top: 3px;
-  color: #989898;
+  color: var(--gray-250);
   text-decoration: line-through;
 `;
 

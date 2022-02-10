@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const Container = styled.div`
   display: flex;
-  background-color: #2b0d61;
+  background-color: var(--blue-500);
   width: 103px;
   height: 21px;
   border-radius: 25px;
@@ -11,7 +11,7 @@ const Container = styled.div`
 
   & p {
     font-size: 0.5rem;
-    color: #ffffff;
+    color: var(--white);
   }
 
   & img {
