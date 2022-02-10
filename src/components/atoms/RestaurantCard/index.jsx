@@ -1,5 +1,18 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { CircleStatus } from "../CircleStatus";
+
+const StyledLink = styled(Link)`
+  text-decoration: none;
+
+  &:focus,
+  &:hover,
+  &:visited,
+  &:link,
+  &:active {
+    text-decoration: none;
+  }
+`;
 
 const Container = styled.div`
   display: flex;
@@ -46,22 +59,24 @@ const Address = styled.p`
   font-size: 0.75rem;
 `;
 
-const RestaurantCard = ({ margin, name, image, address }) => {
+const RestaurantCard = ({ margin, id, name, image, address }) => {
   return (
-    <Container margin={margin}>
-      <StatusContainer>
-        <CircleStatus status />
-      </StatusContainer>
+    <StyledLink to={`/restaurant/${id}`}>
+      <Container margin={margin}>
+        <StatusContainer>
+          <CircleStatus status />
+        </StatusContainer>
 
-      <ImageContainer>
-        <img src={image} alt="Logo do restaurante" />
-      </ImageContainer>
+        <ImageContainer>
+          <img src={image} alt="Logo do restaurante" />
+        </ImageContainer>
 
-      <TextContainer>
-        <Title>{name}</Title>
-        <Address>{address}</Address>
-      </TextContainer>
-    </Container>
+        <TextContainer>
+          <Title>{name}</Title>
+          <Address>{address}</Address>
+        </TextContainer>
+      </Container>
+    </StyledLink>
   );
 };
 

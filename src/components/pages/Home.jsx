@@ -27,10 +27,14 @@ const RestaurantContainer = styled.div`
 function Home() {
   const [restaurants, setRestaurants] = useState([]);
 
-  useEffect(async () => {
-    const response = await api.get("/restaurants");
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await api.get("/restaurants");
 
-    setRestaurants(response.data);
+      setRestaurants(response.data);
+    };
+
+    fetchData();
   }, []);
 
   return (
@@ -39,9 +43,15 @@ function Home() {
       <Title>Bem-vindo ao Lista Rango</Title>
       <SearchBar placeholderText="Buscar estabelecimento" marginTop="40px" />
       <RestaurantContainer>
-        {restaurants.map(({ name, image, address }) => (
+        {restaurants.map(({ id, name, image, address }) => (
           <>
-            <RestaurantCard margin="30px 45px 0 0" name={name} image={image} address={address} />
+            <RestaurantCard
+              margin="30px 22.5px 0 22.5px"
+              id={id}
+              name={name}
+              image={image}
+              address={address}
+            />
           </>
         ))}
       </RestaurantContainer>
