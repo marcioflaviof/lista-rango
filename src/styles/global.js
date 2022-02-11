@@ -28,7 +28,9 @@ const GlobalStyle = createGlobalStyle`
   }
 
   button {
-    cursor: pointer
+    cursor: pointer;
+    background: none;
+    border: none;
   }
 `;
 

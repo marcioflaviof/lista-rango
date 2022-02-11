@@ -2,12 +2,10 @@ import styled from "styled-components";
 import { Nav } from "./atoms/Nav";
 import { SearchBar } from "./atoms/SearchBar";
 import { RestaurantCard } from "./atoms/RestaurantCard";
+import { FlexContainer } from "./utils/componentStyles";
 
-const Container = styled.div`
-  display: flex;
+const Container = styled(FlexContainer)`
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
 `;
 
 const Title = styled.h1`

@@ -1,13 +1,11 @@
 import styled from "styled-components";
+import { FlexContainer } from "../../utils/componentStyles";
 
-const Container = styled.div`
-  display: flex;
+const Container = styled(FlexContainer)`
   background-color: var(--blue-500);
   width: 103px;
   height: 21px;
   border-radius: 25px;
-  align-items: center;
-  justify-content: center;
 
   & p {
     font-size: 0.5rem;

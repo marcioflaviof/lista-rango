@@ -8,10 +8,9 @@ const Container = styled.div`
   border-radius: 4px;
 `;
 
-const Button = styled.div`
+const Button = styled.button`
   display: flex;
   margin: none;
-  cursor: pointer;
   width: 50px;
   align-items: center;
   justify-content: center;

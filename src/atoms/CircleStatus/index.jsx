@@ -1,7 +1,7 @@
 import styled from "styled-components";
+import { FlexContainer } from "../../utils/componentStyles";
 
-const Container = styled.div`
-  display: flex;
+const Container = styled(FlexContainer)`
   text-align: center;
   height: 50px;
   width: 50px;
@@ -9,8 +9,6 @@ const Container = styled.div`
   background-color: var(--blue-500);
   box-shadow: 0px 1px 2px var(--gray-500);
   opacity: 1;
-  align-items: center;
-  justify-content: center;
 `;
 
 const Status = styled.p`
