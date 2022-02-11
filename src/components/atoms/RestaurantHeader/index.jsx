@@ -7,6 +7,7 @@ const Container = styled.div`
   align-items: center;
   max-width: 695px;
   max-height: 145px;
+  margin-bottom: 25px;
   color: var(--gray-300);
 
   ${(props) => ({ ...props.styles })}
@@ -48,13 +49,13 @@ const FitImage = styled.div`
   }
 `;
 
-const RestaurantHeader = ({ styles }) => {
+const RestaurantHeader = () => {
   const { state } = useContext(RestaurantContext);
 
   const { name, image, address, hours } = state;
 
   return (
-    <Container styles={styles}>
+    <Container>
       <FitImage>
         <img src={image || "/images/restaurant-big.png"} alt="Icone do restaurante" />
       </FitImage>

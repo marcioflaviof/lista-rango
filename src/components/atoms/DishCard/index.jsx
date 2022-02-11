@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { DishDetails } from "../../molecules/DishDetails";
 
 const Container = styled.button`
   display: flex;
@@ -27,12 +26,6 @@ const Subtitle = styled.h2`
   font-weight: bold;
   font-size: 1rem;
   margin-bottom: 5px;
-`;
-
-const Description = styled.p`
-  font-size: 0.75rem;
-  text-align: left;
-  margin-bottom: 15px;
 `;
 
 const PriceContainer = styled.div`
@@ -63,7 +56,6 @@ const DishCard = ({ name, image, price }) => {
         <div>
           <div>
             <Subtitle>{name}</Subtitle>
-            {/* <Description>Aprecie</Description> */}
           </div>
           {price ? (
             <PriceContainer>

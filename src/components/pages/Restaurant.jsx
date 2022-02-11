@@ -26,8 +26,8 @@ const Restaurant = () => {
   }, [id]);
   return (
     <Container>
-      <RestaurantHeader styles={{ "margin-bottom": "25px" }} />
-      <MenuSearchBar styles={{ "margin-bottom": "35px" }} />
+      <RestaurantHeader />
+      <MenuSearchBar />
       <Categories dishes={dishes} />
     </Container>
   );

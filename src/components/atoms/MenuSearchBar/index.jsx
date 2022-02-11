@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 const Container = styled.div`
   display: flex;
+  margin-bottom: 35px;
   div {
     display: flex;
     background-color: var(--white);
@@ -32,9 +33,9 @@ const Input = styled.input`
   font-size: 1rem;
 `;
 
-const MenuSearchBar = ({ styles }) => {
+const MenuSearchBar = () => {
   return (
-    <Container styles={styles}>
+    <Container>
       <div>
         <p>Buscar no cardápio</p>
       </div>

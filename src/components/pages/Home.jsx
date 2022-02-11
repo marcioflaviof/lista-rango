@@ -1,10 +1,11 @@
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useContext, useEffect } from "react";
 import styled from "styled-components";
 
 import { FlexContainer } from "./utils/componentStyles";
 import { SearchBar } from "../atoms/SearchBar";
 import { RestaurantCard } from "../atoms/RestaurantCard";
 import { api } from "../../config/http";
+import RestaurantContext from "../../context/RestaurantContext";
 
 const Container = styled(FlexContainer)`
   flex-direction: column;
@@ -24,13 +25,15 @@ const RestaurantContainer = styled.div`
 `;
 
 function Home() {
-  const [restaurants, setRestaurants] = useState([]);
+  const { state, setState } = useContext(RestaurantContext);
+
+  const { restaurants } = state;
 
   useEffect(() => {
     const fetchData = async () => {
       const response = await api.get("/restaurants");
 
-      setRestaurants(response.data);
+      setState({ restaurants: response.data });
     };
 
     fetchData();
