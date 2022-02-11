@@ -3,14 +3,9 @@ import { Counter } from "../../atoms/Counter";
 import { ButtonAdd } from "../../atoms/ButtonAdd";
 import { CloseButton } from "../../atoms/CloseButton";
 
-const Container = styled.div`
-  position: absolute;
-  height: 100vh;
-  width: 100vw;
-  opacity: 1;
-`;
-
 const ContentContainer = styled.div`
+  position: absolute;
+  display: ${(props) => (props.display ? "flex" : "none")};
   margin: 100px;
   height: 485px;
   width: 600px;
@@ -18,6 +13,7 @@ const ContentContainer = styled.div`
   border-radius: 8px;
   padding: 10px;
   position: relative;
+  cursor: pointer;
 `;
 
 const Close = styled.div`
@@ -77,9 +73,9 @@ const ButtonsContainer = styled.div`
   border-color: var(--gray-200);
 `;
 
-const DishDetails = () => {
+const DishDetails = ({ display = false }) => {
   return (
-    <Container>
+    <>
       <ContentContainer>
         <Close>
           <CloseButton />
@@ -105,7 +101,7 @@ const DishDetails = () => {
           <ButtonAdd />
         </ButtonsContainer>
       </ContentContainer>
-    </Container>
+    </>
   );
 };
 

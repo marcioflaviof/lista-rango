@@ -1,8 +1,11 @@
 import styled from "styled-components";
+import { DishDetails } from "../../molecules/DishDetails";
 
-const Container = styled.div`
+const Container = styled.button`
   display: flex;
   align-items: center;
+  background: none;
+  border: none;
   width: 385px;
   height: 115px;
   box-shadow: 0px 4px 8px var(--gray-500);
@@ -52,25 +55,27 @@ const OldPrice = styled.p`
 
 const DishCard = ({ name, image, price }) => {
   return (
-    <Container>
-      <ImageContainer>
-        <img src={image || "/images/dish.png"} alt="Imagem do prato" />
-      </ImageContainer>
-      <div>
+    <>
+      <Container>
+        <ImageContainer>
+          <img src={image || "/images/dish.png"} alt="Imagem do prato" />
+        </ImageContainer>
         <div>
-          <Subtitle>{name}</Subtitle>
-          <Description>Aprecie</Description>
+          <div>
+            <Subtitle>{name}</Subtitle>
+            {/* <Description>Aprecie</Description> */}
+          </div>
+          {price ? (
+            <PriceContainer>
+              <Price>R$ {price}</Price>
+              <OldPrice>R$ {price + 10}</OldPrice>
+            </PriceContainer>
+          ) : (
+            <p>Não disponível</p>
+          )}
         </div>
-        {price ? (
-          <PriceContainer>
-            <Price>R$ {price}</Price>
-            <OldPrice>R$ {price + 10}</OldPrice>
-          </PriceContainer>
-        ) : (
-          <p>Não disponível</p>
-        )}
-      </div>
-    </Container>
+      </Container>
+    </>
   );
 };
 
