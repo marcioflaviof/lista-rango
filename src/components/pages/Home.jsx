@@ -1,7 +1,7 @@
 import { Fragment, useContext, useEffect } from "react";
 import styled from "styled-components";
 
-import { FlexContainer } from "./utils/componentStyles";
+import { FlexContainer } from "../../utils/componentStyles";
 import { SearchBar } from "../atoms/SearchBar";
 import { RestaurantCard } from "../atoms/RestaurantCard";
 import { api } from "../../config/http";
@@ -37,6 +37,7 @@ function Home() {
     };
 
     fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

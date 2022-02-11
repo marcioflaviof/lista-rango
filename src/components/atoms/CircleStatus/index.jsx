@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { FlexContainer } from "../../utils/componentStyles";
+import { FlexContainer } from "../../../utils/componentStyles";
 
 const Container = styled(FlexContainer)`
   text-align: center;
