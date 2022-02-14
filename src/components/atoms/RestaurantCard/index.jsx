@@ -1,19 +1,12 @@
-import { useContext } from "react";
-import RestaurantContext from "../../../context/RestaurantContext";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import RestaurantContext from "../../../context/RestaurantContext";
+import { openHour } from "../../../utils/openHour";
 import { CircleStatus } from "../CircleStatus";
 
 const StyledLink = styled(Link)`
   text-decoration: none;
-
-  &:focus,
-  &:hover,
-  &:visited,
-  &:link,
-  &:active {
-    text-decoration: none;
-  }
 `;
 
 const Container = styled.div`
@@ -22,7 +15,7 @@ const Container = styled.div`
   box-shadow: 0px 2px 4px var(--gray-500);
   width: 365px;
   height: 100px;
-  margin: ${(props) => props.margin || 0};
+  margin: 30px 22.5px 0 22.5px;
   position: relative;
 
   :hover {
@@ -62,10 +55,23 @@ const Address = styled.p`
   font-size: 0.75rem;
 `;
 
-const RestaurantCard = ({ restaurant, margin }) => {
+const RestaurantCard = ({ restaurant }) => {
   const { setState } = useContext(RestaurantContext);
+  const [isOpen, setIsOpen] = useState(false);
 
   const { id, name, image, address, hours } = restaurant;
+
+  useEffect(() => {
+    let open = false;
+
+    if (hours) {
+      hours.forEach((t) => {
+        if (!open) open = openHour(t.from, t.to, t.days);
+      });
+    }
+
+    setIsOpen(open);
+  }, [hours]);
 
   function handleClick() {
     setState({ name, image, address, hours });
@@ -73,9 +79,9 @@ const RestaurantCard = ({ restaurant, margin }) => {
 
   return (
     <StyledLink to={`/restaurant/${id}`} onClick={handleClick}>
-      <Container margin={margin}>
+      <Container>
         <StatusContainer>
-          <CircleStatus status />
+          <CircleStatus status={isOpen} />
         </StatusContainer>
 
         <ImageContainer>

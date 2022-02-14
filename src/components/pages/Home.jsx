@@ -47,7 +47,7 @@ function Home() {
       <RestaurantContainer>
         {restaurants.map((restaurant) => (
           <Fragment key={restaurant.id}>
-            <RestaurantCard margin="30px 22.5px 0 22.5px" restaurant={restaurant} />
+            <RestaurantCard restaurant={restaurant} />
           </Fragment>
         ))}
       </RestaurantContainer>

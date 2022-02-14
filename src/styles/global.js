@@ -31,6 +31,14 @@ const GlobalStyle = createGlobalStyle`
     background: none;
     border: none;
   }
+
+  &:focus,
+  &:hover,
+  &:visited,
+  &:link,
+  &:active {
+    text-decoration: none;
+  }
 `;
 
 export { GlobalStyle };
