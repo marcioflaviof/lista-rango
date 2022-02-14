@@ -67,7 +67,7 @@ const DishCard = ({ name, image, price }) => {
           </div>
           {price ? (
             <PriceContainer>
-              <Price>R$ {price}</Price>
+              <Price>R$ {price.toFixed(2)}</Price>
               <OldPrice>R$ {price + 10}</OldPrice>
             </PriceContainer>
           ) : (

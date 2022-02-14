@@ -1,4 +1,6 @@
+import { useContext } from "react";
 import styled from "styled-components";
+import DishQuantityContext from "../../../context/DishQuantityContext";
 
 const Button = styled.button`
   display: flex;
@@ -15,9 +17,13 @@ const Button = styled.button`
 `;
 
 const ButtonAdd = ({ price }) => {
+  const { quantity } = useContext(DishQuantityContext);
+
+  const value = (price * quantity).toFixed(2);
+
   return (
     <Button>
-      Adicionar <span>R$ {price}</span>
+      Adicionar <span>R$ {value}</span>
     </Button>
   );
 };

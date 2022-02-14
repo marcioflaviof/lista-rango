@@ -1,4 +1,6 @@
+import { useContext } from "react";
 import styled from "styled-components";
+import DishQuantityContext from "../../../context/DishQuantityContext";
 
 const Container = styled.div`
   display: flex;
@@ -24,14 +26,32 @@ const Input = styled.input`
   border: none;
   color: var(--cyan);
   font-size: 1.25rem;
+  text-align: center;
 `;
 
 const Counter = () => {
+  const { quantity, setQuantity } = useContext(DishQuantityContext);
+
+  const handleValue = (event) => {
+    const { value } = event.target;
+
+    setQuantity(value);
+  };
+
+  const addValue = () => {
+    setQuantity(quantity + 1);
+  };
+
+  const subtractValue = () => {
+    if (quantity <= 0) return;
+    setQuantity(quantity - 1);
+  };
+
   return (
     <Container>
-      <Button>-</Button>
-      <Input type="text" />
-      <Button>+</Button>
+      <Button onClick={subtractValue}>-</Button>
+      <Input type="text" onChange={handleValue} value={quantity} />
+      <Button onClick={addValue}>+</Button>
     </Container>
   );
 };

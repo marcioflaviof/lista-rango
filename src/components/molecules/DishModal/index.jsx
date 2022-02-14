@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import reactDom from "react-dom";
 import styled from "styled-components";
+import { DishQuantityProvider } from "../../../context/DishQuantityContext";
 import ModalContext from "../../../context/ModalContext";
 import { ButtonAdd } from "../../atoms/ButtonAdd";
 import { CloseButton } from "../../atoms/CloseButton";
@@ -116,12 +117,14 @@ const DishModal = () => {
                 <Text>{description}</Text>
               </TextContainer>
               <Price>
-                <p>R$ {price}</p>
+                <p>R$ {price.toFixed(2)}</p>
               </Price>
             </DetailsContainer>
             <ButtonsContainer>
-              <Counter />
-              <ButtonAdd price={price} />
+              <DishQuantityProvider>
+                <Counter />
+                <ButtonAdd price={price} />
+              </DishQuantityProvider>
             </ButtonsContainer>
           </Container>
         </>
