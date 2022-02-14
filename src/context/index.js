@@ -1,7 +1,12 @@
+import { ModalProvider } from "./ModalContext";
 import { RestaurantProvider } from "./RestaurantContext";
 
 const GlobalContext = ({ children }) => {
-  return <RestaurantProvider>{children}</RestaurantProvider>;
+  return (
+    <RestaurantProvider>
+      <ModalProvider>{children}</ModalProvider>
+    </RestaurantProvider>
+  );
 };
 
 export default GlobalContext;

@@ -1,4 +1,6 @@
+import { useContext } from "react";
 import styled from "styled-components";
+import ModalContext from "../../../context/ModalContext";
 
 const Container = styled.button`
   display: flex;
@@ -20,8 +22,14 @@ const Status = styled.p`
 `;
 
 const CloseButton = () => {
+  const { state, setState } = useContext(ModalContext);
+
+  const closeModal = () => {
+    setState({ showModal: !state.showModal });
+  };
+
   return (
-    <Container>
+    <Container onClick={closeModal}>
       <Status>X</Status>
     </Container>
   );

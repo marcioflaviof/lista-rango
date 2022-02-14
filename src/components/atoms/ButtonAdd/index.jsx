@@ -14,10 +14,10 @@ const Button = styled.button`
   justify-content: space-around;
 `;
 
-const ButtonAdd = () => {
+const ButtonAdd = ({ price }) => {
   return (
     <Button>
-      Adicionar <span>R$ 19,90</span>
+      Adicionar <span>R$ {price}</span>
     </Button>
   );
 };

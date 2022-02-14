@@ -20,7 +20,6 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    outline: 0;
   }
 
   h1, h2, h3, p {

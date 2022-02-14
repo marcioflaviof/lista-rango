@@ -1,4 +1,6 @@
+import { useContext } from "react";
 import styled from "styled-components";
+import ModalContext from "../../../context/ModalContext";
 
 const Container = styled.button`
   display: flex;
@@ -47,9 +49,15 @@ const OldPrice = styled.p`
 `;
 
 const DishCard = ({ name, image, price }) => {
+  const { state, setState } = useContext(ModalContext);
+
+  const showDishModal = () => {
+    setState({ showModal: !state.showModal, name, image, price });
+  };
+
   return (
     <>
-      <Container>
+      <Container onClick={showDishModal}>
         <ImageContainer>
           <img src={image || "/images/dish.png"} alt="Imagem do prato" />
         </ImageContainer>

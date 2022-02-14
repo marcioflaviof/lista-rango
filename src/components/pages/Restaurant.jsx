@@ -6,6 +6,7 @@ import { api } from "../../config/http";
 import { MenuSearchBar } from "../atoms/MenuSearchBar";
 import { RestaurantHeader } from "../atoms/RestaurantHeader";
 import { Categories } from "../molecules/Categories";
+import { DishModal } from "../molecules/DishModal";
 
 const Container = styled.div`
   margin: 75px;
@@ -24,12 +25,16 @@ const Restaurant = () => {
 
     fetchData();
   }, [id]);
+
   return (
-    <Container>
-      <RestaurantHeader />
-      <MenuSearchBar />
-      <Categories dishes={dishes} />
-    </Container>
+    <>
+      <DishModal />
+      <Container>
+        <RestaurantHeader />
+        <MenuSearchBar />
+        <Categories dishes={dishes} />
+      </Container>
+    </>
   );
 };
 
