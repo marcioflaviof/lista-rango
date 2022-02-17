@@ -54,7 +54,10 @@ const Categories = ({ dishes }) => {
             <CategoriesContainer>
               <h3>{group}</h3>
 
-              <img src="/images/arrow.svg" alt="Clique para mostrar o conteudo" />
+              <img
+                src="/images/arrow.svg"
+                alt="Clique para mostrar o conteudo"
+              />
             </CategoriesContainer>
             <DishesContainer>
               {dishes.map((dish) => {

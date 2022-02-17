@@ -1,5 +1,6 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import styled from "styled-components";
+import { api } from "../../../config/http";
 import RestaurantContext from "../../../context/RestaurantContext";
 
 const Container = styled.div`
@@ -9,8 +10,6 @@ const Container = styled.div`
   max-height: 145px;
   margin-bottom: 25px;
   color: var(--gray-300);
-
-  ${(props) => ({ ...props.styles })}
 `;
 
 const DetailsContainer = styled.div`
@@ -49,15 +48,30 @@ const FitImage = styled.div`
   }
 `;
 
-const RestaurantHeader = () => {
-  const { state } = useContext(RestaurantContext);
+const RestaurantHeader = ({ id }) => {
+  const { state, setState } = useContext(RestaurantContext);
 
   const { name, image, address, hours } = state;
+
+  useEffect(() => {
+    if (name) return;
+
+    const fetchData = async () => {
+      const response = await api.get(`/restaurants/${id}`);
+
+      setState({ ...response.data });
+    };
+
+    fetchData();
+  }, [name]);
 
   return (
     <Container>
       <FitImage>
-        <img src={image || "/images/restaurant-big.png"} alt="Icone do restaurante" />
+        <img
+          src={image || "/images/restaurant-big.png"}
+          alt="Icone do restaurante"
+        />
       </FitImage>
 
       <DetailsContainer>

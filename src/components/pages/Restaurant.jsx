@@ -30,7 +30,7 @@ const Restaurant = () => {
     <>
       <DishModal />
       <Container>
-        <RestaurantHeader />
+        <RestaurantHeader id={id} />
         <MenuSearchBar />
         <Categories dishes={dishes} />
       </Container>
