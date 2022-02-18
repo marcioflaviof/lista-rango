@@ -6,7 +6,8 @@ const Container = styled(FlexContainer)`
   height: 50px;
   width: 50px;
   border-radius: 50%;
-  background-color: var(--blue-500);
+  background-color: ${(props) =>
+    props.status ? "var(--blue-500)" : "var(--purple-100)"};
   box-shadow: 0px 1px 2px var(--gray-500);
   opacity: 1;
 `;
@@ -19,7 +20,7 @@ const Status = styled.p`
 
 const CircleStatus = ({ status }) => {
   return (
-    <Container>
+    <Container status={status}>
       <Status>{status ? "Aberto agora" : "Fechado"}</Status>
     </Container>
   );

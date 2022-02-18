@@ -1,4 +1,7 @@
+import { useContext } from "react";
 import styled from "styled-components";
+import { api } from "../../../config/http";
+import RestaurantContext from "../../../context/RestaurantContext";
 
 const Input = styled.input`
   background-image: url(${(props) => props.img});
@@ -18,12 +21,29 @@ const Input = styled.input`
 `;
 
 const SearchBar = ({ placeholderText, marginTop }) => {
+  const { state, setState } = useContext(RestaurantContext);
+
+  const handleSearch = async (event) => {
+    const { value } = event.target;
+
+    if (value.length >= 3) {
+      const response = await api.get(`/restaurants?name_like=${value}`);
+
+      setState({ ...state, restaurants: response.data });
+    } else {
+      const response = await api.get("/restaurants");
+
+      setState({ ...state, restaurants: response.data });
+    }
+  };
+
   return (
     <Input
       img="/images/search.svg"
       type="search"
       placeholder={placeholderText}
       marginTop={marginTop}
+      onChange={handleSearch}
     />
   );
 };

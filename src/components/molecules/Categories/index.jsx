@@ -1,9 +1,15 @@
+import { useCallback, useMemo, useState } from "react";
 import styled from "styled-components";
 import { DishCard } from "../../atoms/DishCard";
 
-const Container = styled.div`
-  max-width: 800px;
-  margin-top: 50px;
+const DishesContainer = styled.div`
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+
+  > * {
+    margin-top: 30px;
+  }
 `;
 
 const CategoriesContainer = styled.div`
@@ -27,31 +33,57 @@ const CategoriesContainer = styled.div`
 
   img {
     margin-right: 20px;
-    transform: rotate(-90deg);
   }
 `;
 
-const DishesContainer = styled.div`
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: space-between;
+const Container = styled.div`
+  max-width: 800px;
+  margin-top: 50px;
 
-  > * {
-    margin-top: 30px;
+  ${CategoriesContainer} {
+    cursor: pointer;
+    & > img {
+      transform: ${({ open }) => (!open ? "rotate(-90deg)" : "none")};
+      transition: transform 0.3s linear;
+    }
   }
 `;
 
 const Categories = ({ dishes }) => {
-  const groups = dishes.map((dish) => dish.group);
+  const [, updateState] = useState();
+  const forceUpdate = useCallback(() => updateState({}), []);
 
-  const uniqueGroups = [...new Set(groups)];
+  const activeGroups = useMemo(() => {
+    let currentActiveGroups = {};
+
+    dishes.forEach((dish) => {
+      if (!currentActiveGroups[dish.group])
+        currentActiveGroups[dish.group] = { active: false, dishes: [dish] };
+      else {
+        currentActiveGroups[dish.group].dishes = [
+          ...currentActiveGroups[dish.group].dishes,
+          dish,
+        ];
+      }
+    });
+
+    return currentActiveGroups;
+  }, [dishes]);
+
+  function changeGroupActivity(group) {
+    activeGroups[group] = {
+      ...activeGroups[group],
+      active: !activeGroups[group].active,
+    };
+    forceUpdate();
+  }
 
   return (
     <>
-      {uniqueGroups &&
-        uniqueGroups.map((group) => (
-          <Container key={group}>
-            <CategoriesContainer>
+      {Object.keys(activeGroups) &&
+        Object.keys(activeGroups).map((group) => (
+          <Container key={group} open={activeGroups[group].active}>
+            <CategoriesContainer onClick={() => changeGroupActivity(group)}>
               <h3>{group}</h3>
 
               <img
@@ -60,18 +92,19 @@ const Categories = ({ dishes }) => {
               />
             </CategoriesContainer>
             <DishesContainer>
-              {dishes.map((dish) => {
-                return (
-                  dish.group === group && (
-                    <DishCard
-                      key={dish.name}
-                      name={dish.name}
-                      image={dish.image}
-                      price={dish.price}
-                    />
-                  )
-                );
-              })}
+              {activeGroups[group].active &&
+                dishes.map((dish) => {
+                  return (
+                    dish.group === group && (
+                      <DishCard
+                        key={dish.name}
+                        name={dish.name}
+                        image={dish.image}
+                        price={dish.price}
+                      />
+                    )
+                  );
+                })}
             </DishesContainer>
           </Container>
         ))}

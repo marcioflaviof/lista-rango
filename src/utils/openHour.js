@@ -11,7 +11,8 @@ const openHour = (initialHour, finalHour, days) => {
       new Date().setHours(finalHour.split(":")[0], finalHour.split(":")[1])
     );
 
-    const isOpen = compareAsc(now, openHour) === 1 && compareAsc(now, closeHour) === -1;
+    const isOpen =
+      compareAsc(now, openHour) === 1 && compareAsc(now, closeHour) === -1;
 
     if (isOpen) return true;
   }
