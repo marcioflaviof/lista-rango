@@ -96,12 +96,7 @@ const Categories = ({ dishes }) => {
                 dishes.map((dish) => {
                   return (
                     dish.group === group && (
-                      <DishCard
-                        key={dish.name}
-                        name={dish.name}
-                        image={dish.image}
-                        price={dish.price}
-                      />
+                      <DishCard key={dish.name} dish={dish} />
                     )
                   );
                 })}

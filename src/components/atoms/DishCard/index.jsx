@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import styled from "styled-components";
 import ModalContext from "../../../context/ModalContext";
+import { openHour } from "../../../utils/openHour";
 
 const Container = styled.button`
   display: flex;
@@ -48,8 +49,18 @@ const OldPrice = styled.p`
   text-decoration: line-through;
 `;
 
-const DishCard = ({ name, image, price }) => {
+const DishCard = ({ dish }) => {
   const { state, setState } = useContext(ModalContext);
+  const { name, price, image, sales } = dish;
+  let isOnSale = false;
+
+  if (sales) {
+    isOnSale = openHour(
+      sales[0].hours[0].from,
+      sales[0].hours[0].to,
+      sales[0].hours[0].days
+    );
+  }
 
   const showDishModal = () => {
     setState({ showModal: !state.showModal, name, image, price });
@@ -67,8 +78,8 @@ const DishCard = ({ name, image, price }) => {
           </div>
           {price ? (
             <PriceContainer>
-              <Price>R$ {price.toFixed(2)}</Price>
-              <OldPrice>R$ {price + 10}</OldPrice>
+              <Price>R$ {!isOnSale ? price.toFixed(2) : sales[0].price}</Price>
+              {isOnSale && <OldPrice>R$ {price}</OldPrice>}
             </PriceContainer>
           ) : (
             <p>Não disponível</p>
