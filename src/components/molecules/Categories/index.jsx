@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import styled from "styled-components";
 import { DishCard } from "../../atoms/DishCard";
 
@@ -47,54 +47,57 @@ const Container = styled.div`
       transition: transform 0.3s linear;
     }
   }
+
+  ${DishesContainer} {
+    overflow: hidden;
+    transition: all 0.6s ease;
+    ${({ open }) => `
+      opacity: ${open ? "1" : "0"};
+      max-height: ${open ? "100vh" : "0px"};
+      padding-bottom: ${open ? "24px" : "0"};
+    `}
+  }
 `;
 
 const Categories = ({ dishes }) => {
-  const [active, setActive] = useState({});
+  const [activeGroups, setActiveGroups] = useState([]);
 
-  const groups = useMemo(() => {
-    return [...new Set(dishes.map((dish) => dish.group))];
-  }, [dishes]);
+  const groups = useMemo(() => [...new Set(dishes.map((dish) => dish.group))], [dishes]);
 
-  const activeGroups = useMemo(() => {
-    let currentActiveGroups = {};
-    groups.forEach((group) => (currentActiveGroups[group] = false));
+  const handleActiveGroup = useCallback(
+    (group) =>
+      setActiveGroups((groupsNames) => {
+        const hasGroupName = groupsNames.some((groupName) => groupName === group);
 
-    return currentActiveGroups;
-  }, [groups]);
+        if (hasGroupName) {
+          return groupsNames.filter((groupName) => groupName !== group);
+        }
 
-  useEffect(() => {
-    if (Object.keys(activeGroups).length === Object.keys(active).length) return;
-    setActive(activeGroups);
-  }, [activeGroups, active]);
+        return [...groupsNames, group];
+      }),
+    []
+  );
 
   return (
     <>
-      {Object.keys(active) &&
-        Object.keys(active).map((group) => (
-          <Container key={group} open={active[group]}>
-            <CategoriesContainer
-              onClick={() => setActive({ ...active, [group]: !active[group] })}
-            >
+      {groups.map((group) => {
+        const isActive = activeGroups.some((activeGroup) => activeGroup === group);
+
+        return (
+          <Container key={group} open={isActive}>
+            <CategoriesContainer onClick={() => handleActiveGroup(group)}>
               <h3>{group}</h3>
 
-              <img
-                src="/images/arrow.svg"
-                alt="Clique para mostrar o conteudo"
-              />
+              <img src="/images/arrow.svg" alt="Clique para mostrar o conteudo" />
             </CategoriesContainer>
             <DishesContainer>
-              {active[group] &&
-                dishes.map((dish) => {
-                  return (
-                    dish.group === group && (
-                      <DishCard key={dish.name} dish={dish} />
-                    )
-                  );
-                })}
+              {dishes.map(
+                (dish) => dish.group === group && <DishCard key={dish.name} dish={dish} />
+              )}
             </DishesContainer>
           </Container>
-        ))}
+        );
+      })}
     </>
   );
 };
