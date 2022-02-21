@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import styled from "styled-components";
 import { DishCard } from "../../atoms/DishCard";
 
@@ -50,40 +50,32 @@ const Container = styled.div`
 `;
 
 const Categories = ({ dishes }) => {
-  const [, updateState] = useState();
-  const forceUpdate = useCallback(() => updateState({}), []);
+  const [active, setActive] = useState({});
+
+  const groups = useMemo(() => {
+    return [...new Set(dishes.map((dish) => dish.group))];
+  }, [dishes]);
 
   const activeGroups = useMemo(() => {
     let currentActiveGroups = {};
-
-    dishes.forEach((dish) => {
-      if (!currentActiveGroups[dish.group])
-        currentActiveGroups[dish.group] = { active: false, dishes: [dish] };
-      else {
-        currentActiveGroups[dish.group].dishes = [
-          ...currentActiveGroups[dish.group].dishes,
-          dish,
-        ];
-      }
-    });
+    groups.forEach((group) => (currentActiveGroups[group] = false));
 
     return currentActiveGroups;
-  }, [dishes]);
+  }, [groups]);
 
-  function changeGroupActivity(group) {
-    activeGroups[group] = {
-      ...activeGroups[group],
-      active: !activeGroups[group].active,
-    };
-    forceUpdate();
-  }
+  useEffect(() => {
+    if (Object.keys(activeGroups).length === Object.keys(active).length) return;
+    setActive(activeGroups);
+  }, [activeGroups, active]);
 
   return (
     <>
-      {Object.keys(activeGroups) &&
-        Object.keys(activeGroups).map((group) => (
-          <Container key={group} open={activeGroups[group].active}>
-            <CategoriesContainer onClick={() => changeGroupActivity(group)}>
+      {Object.keys(active) &&
+        Object.keys(active).map((group) => (
+          <Container key={group} open={active[group]}>
+            <CategoriesContainer
+              onClick={() => setActive({ ...active, [group]: !active[group] })}
+            >
               <h3>{group}</h3>
 
               <img
@@ -92,7 +84,7 @@ const Categories = ({ dishes }) => {
               />
             </CategoriesContainer>
             <DishesContainer>
-              {activeGroups[group].active &&
+              {active[group] &&
                 dishes.map((dish) => {
                   return (
                     dish.group === group && (
