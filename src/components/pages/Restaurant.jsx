@@ -15,6 +15,7 @@ const Container = styled.div`
 const Restaurant = () => {
   const { id } = useParams();
   const [dishes, setDishes] = useState([]);
+  const [searching, setSearching] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -31,8 +32,12 @@ const Restaurant = () => {
       <DishModal />
       <Container>
         <RestaurantHeader id={id} />
-        <MenuSearchBar />
-        <Categories dishes={dishes} />
+        <MenuSearchBar
+          id={id}
+          setSearching={setSearching}
+          searching={searching}
+        />
+        {!searching && <Categories dishes={dishes} />}
       </Container>
     </>
   );

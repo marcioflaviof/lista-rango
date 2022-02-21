@@ -62,12 +62,17 @@ const Container = styled.div`
 const Categories = ({ dishes }) => {
   const [activeGroups, setActiveGroups] = useState([]);
 
-  const groups = useMemo(() => [...new Set(dishes.map((dish) => dish.group))], [dishes]);
+  const groups = useMemo(
+    () => [...new Set(dishes.map((dish) => dish.group))],
+    [dishes]
+  );
 
   const handleActiveGroup = useCallback(
     (group) =>
       setActiveGroups((groupsNames) => {
-        const hasGroupName = groupsNames.some((groupName) => groupName === group);
+        const hasGroupName = groupsNames.some(
+          (groupName) => groupName === group
+        );
 
         if (hasGroupName) {
           return groupsNames.filter((groupName) => groupName !== group);
@@ -81,18 +86,26 @@ const Categories = ({ dishes }) => {
   return (
     <>
       {groups.map((group) => {
-        const isActive = activeGroups.some((activeGroup) => activeGroup === group);
+        const isActive = activeGroups.some(
+          (activeGroup) => activeGroup === group
+        );
 
         return (
           <Container key={group} open={isActive}>
             <CategoriesContainer onClick={() => handleActiveGroup(group)}>
               <h3>{group}</h3>
 
-              <img src="/images/arrow.svg" alt="Clique para mostrar o conteudo" />
+              <img
+                src="/images/arrow.svg"
+                alt="Clique para mostrar o conteudo"
+              />
             </CategoriesContainer>
             <DishesContainer>
               {dishes.map(
-                (dish) => dish.group === group && <DishCard key={dish.name} dish={dish} />
+                (dish) =>
+                  dish.group === group && (
+                    <DishCard key={dish.name} dish={dish} />
+                  )
               )}
             </DishesContainer>
           </Container>

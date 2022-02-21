@@ -1,4 +1,7 @@
+import { useState } from "react";
 import styled from "styled-components";
+import { api } from "../../../config/http";
+import { DishCard } from "../DishCard";
 
 const Container = styled.div`
   display: flex;
@@ -13,8 +16,6 @@ const Container = styled.div`
     border-radius: 20px 0 0 20px;
     box-shadow: -1px 2px 4px var(--gray-500);
   }
-
-  ${(props) => ({ ...props.styles })}
 `;
 
 const Input = styled.input`
@@ -33,14 +34,45 @@ const Input = styled.input`
   font-size: 1rem;
 `;
 
-const MenuSearchBar = () => {
+const DishesContainer = styled.div`
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  max-width: 800px;
+`;
+
+const MenuSearchBar = ({ id, setSearching, searching }) => {
+  const [dishes, setDishes] = useState([]);
+
+  const handleSearch = async (event) => {
+    const { value } = event.target;
+
+    if (value.length === 0) setSearching(false);
+    if (value.length > 0) setSearching(true);
+
+    const response = await api.get(
+      `/restaurants/${id}/menu?name_like=${value}`
+    );
+
+    setDishes(response.data);
+  };
+
   return (
-    <Container>
-      <div>
-        <p>Buscar no cardápio</p>
-      </div>
-      <Input img="/images/search.svg" type="search" />
-    </Container>
+    <>
+      <Container>
+        <div>
+          <p>Buscar no cardápio</p>
+        </div>
+        <Input img="/images/search.svg" type="search" onChange={handleSearch} />
+      </Container>
+      {searching && (
+        <DishesContainer>
+          {dishes.map((dish) => (
+            <DishCard key={dish.name} dish={dish} />
+          ))}
+        </DishesContainer>
+      )}
+    </>
   );
 };
 
