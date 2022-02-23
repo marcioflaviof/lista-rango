@@ -108,7 +108,10 @@ const DishModal = () => {
               <CloseButton />
             </Close>
             <ImageContainer>
-              <img src={image || "/images/vegetarian-dish.png"} alt="Imagem do prato" />
+              <img
+                src={image || "/images/vegetarian-dish.png"}
+                alt="Imagem do prato"
+              />
             </ImageContainer>
 
             <DetailsContainer>

@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useCallback, useContext, useEffect } from "react";
 import styled from "styled-components";
 import { api } from "../../../config/http";
 import RestaurantContext from "../../../context/RestaurantContext";
@@ -49,18 +49,18 @@ const FitImage = styled.div`
 `;
 
 const RestaurantHeader = ({ id }) => {
-  const { state, setState } = useContext(RestaurantContext);
+  const { restaurant, setRestaurant } = useContext(RestaurantContext);
 
-  const { name, image, address, hours } = state;
+  const { name, image, address, hours } = restaurant;
+
+  const fetchData = useCallback(async () => {
+    const response = await api.get(`/restaurants/${id}`);
+
+    setRestaurant({ ...response.data });
+  }, [id]);
 
   useEffect(() => {
     if (name) return;
-
-    const fetchData = async () => {
-      const response = await api.get(`/restaurants/${id}`);
-
-      setState({ ...response.data });
-    };
 
     fetchData();
   }, [name]);

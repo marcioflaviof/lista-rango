@@ -21,7 +21,7 @@ const Input = styled.input`
 `;
 
 const SearchBar = ({ placeholderText, marginTop }) => {
-  const { state, setState } = useContext(RestaurantContext);
+  const { restaurant, setRestaurant } = useContext(RestaurantContext);
 
   const handleSearch = async (event) => {
     const { value } = event.target;
@@ -29,11 +29,11 @@ const SearchBar = ({ placeholderText, marginTop }) => {
     if (value.length >= 3) {
       const response = await api.get(`/restaurants?name_like=${value}`);
 
-      setState({ ...state, restaurants: response.data });
+      setRestaurant({ ...restaurant, restaurants: response.data });
     } else {
       const response = await api.get("/restaurants");
 
-      setState({ ...state, restaurants: response.data });
+      setRestaurant({ ...restaurant, restaurants: response.data });
     }
   };
 

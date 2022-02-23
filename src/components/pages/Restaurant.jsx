@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router";
 import styled from "styled-components";
 import { api } from "../../config/http";
@@ -17,15 +17,15 @@ const Restaurant = () => {
   const [dishes, setDishes] = useState([]);
   const [searching, setSearching] = useState(false);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await api.get(`/restaurants/${id}/menu`);
+  const fetchData = useCallback(async () => {
+    const response = await api.get(`/restaurants/${id}/menu`);
 
-      setDishes(response.data);
-    };
-
-    fetchData();
+    setDishes(response.data);
   }, [id]);
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
 
   return (
     <>

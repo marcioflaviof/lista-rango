@@ -1,4 +1,4 @@
-import { Fragment, useContext, useEffect } from "react";
+import { Fragment, useCallback, useContext, useEffect } from "react";
 import styled from "styled-components";
 
 import { FlexContainer } from "../../utils/componentStyles";
@@ -25,20 +25,21 @@ const RestaurantContainer = styled.div`
 `;
 
 function Home() {
-  const { state, setState } = useContext(RestaurantContext);
+  const { restaurant, setRestaurant } = useContext(RestaurantContext);
 
-  const { restaurants } = state;
+  const { restaurants } = restaurant;
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await api.get("/restaurants");
+  const fetchData = useCallback(async () => {
+    const response = await api.get("/restaurants");
 
-      setState({ restaurants: response.data });
-    };
-
-    fetchData();
+    setRestaurant({ restaurants: response.data });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [fetchData]);
 
   return (
     <Container>

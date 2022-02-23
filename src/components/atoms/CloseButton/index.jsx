@@ -22,11 +22,7 @@ const Status = styled.p`
 `;
 
 const CloseButton = () => {
-  const { state, setState } = useContext(ModalContext);
-
-  const closeModal = () => {
-    setState({ showModal: !state.showModal });
-  };
+  const { closeModal } = useContext(ModalContext);
 
   return (
     <Container onClick={closeModal}>

@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useMemo } from "react";
 import styled from "styled-components";
 import ModalContext from "../../../context/ModalContext";
 import { openHour } from "../../../utils/openHour";
@@ -54,16 +54,24 @@ const DishCard = ({ dish }) => {
   const { name, price, image, sales } = dish;
   let isOnSale = false;
 
-  if (sales) {
-    isOnSale = openHour(
-      sales[0].hours[0].from,
-      sales[0].hours[0].to,
-      sales[0].hours[0].days
-    );
-  }
+  isOnSale = useMemo(() => {
+    if (sales) {
+      return openHour(
+        sales[0].hours[0].from,
+        sales[0].hours[0].to,
+        sales[0].hours[0].days
+      );
+    }
+    return false;
+  }, [sales]);
 
   const showDishModal = () => {
-    setState({ showModal: !state.showModal, name, image, price });
+    setState({
+      showModal: !state.showModal,
+      name,
+      image,
+      price: !isOnSale ? price : sales[0].price,
+    });
   };
 
   return (

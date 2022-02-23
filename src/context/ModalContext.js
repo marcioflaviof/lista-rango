@@ -1,7 +1,13 @@
 import { createContext, useState } from "react";
 
 const ModalContext = createContext({
-  state: { showModal: false, name: "", description: "", image: "", price: 9999999 },
+  state: {
+    showModal: false,
+    name: "",
+    description: "",
+    image: "",
+    price: 9999999,
+  },
   setState: () => {},
 });
 
@@ -14,7 +20,13 @@ function ModalProvider({ children }) {
     price: 9999999,
   });
 
-  return <ModalContext.Provider value={{ state, setState }}>{children}</ModalContext.Provider>;
+  const closeModal = () => setState({ showModal: !state.showModal });
+
+  return (
+    <ModalContext.Provider value={{ state, setState, closeModal }}>
+      {children}
+    </ModalContext.Provider>
+  );
 }
 
 export { ModalProvider };

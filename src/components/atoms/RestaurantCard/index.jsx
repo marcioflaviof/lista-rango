@@ -56,7 +56,7 @@ const Address = styled.p`
 `;
 
 const RestaurantCard = ({ restaurant }) => {
-  const { setState } = useContext(RestaurantContext);
+  const { setRestaurant } = useContext(RestaurantContext);
   const [isOpen, setIsOpen] = useState(false);
 
   const { id, name, image, address, hours } = restaurant;
@@ -74,7 +74,7 @@ const RestaurantCard = ({ restaurant }) => {
   }, [hours]);
 
   function handleClick() {
-    setState({ name, image, address, hours });
+    setRestaurant({ name, image, address, hours });
   }
 
   return (

@@ -1,12 +1,12 @@
 import { createContext, useState } from "react";
 
 const RestaurantContext = createContext({
-  state: { name: "", image: "", address: "", hours: [], restaurants: [] },
-  setState: () => {},
+  restaurant: { name: "", image: "", address: "", hours: [], restaurants: [] },
+  setRestaurant: () => {},
 });
 
 function RestaurantProvider({ children }) {
-  const [state, setState] = useState({
+  const [restaurant, setRestaurant] = useState({
     name: "",
     image: "",
     address: "",
@@ -15,7 +15,9 @@ function RestaurantProvider({ children }) {
   });
 
   return (
-    <RestaurantContext.Provider value={{ state, setState }}>{children}</RestaurantContext.Provider>
+    <RestaurantContext.Provider value={{ restaurant, setRestaurant }}>
+      {children}
+    </RestaurantContext.Provider>
   );
 }
 
