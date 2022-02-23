@@ -57,21 +57,18 @@ const RestaurantHeader = ({ id }) => {
     const response = await api.get(`/restaurants/${id}`);
 
     setRestaurant({ ...response.data });
-  }, [id]);
+  }, [id, setRestaurant]);
 
   useEffect(() => {
     if (name) return;
 
     fetchData();
-  }, [name]);
+  }, [name, fetchData]);
 
   return (
     <Container>
       <FitImage>
-        <img
-          src={image || "/images/restaurant-big.png"}
-          alt="Icone do restaurante"
-        />
+        <img src={image || "/images/restaurant-big.png"} alt="Icone do restaurante" />
       </FitImage>
 
       <DetailsContainer>

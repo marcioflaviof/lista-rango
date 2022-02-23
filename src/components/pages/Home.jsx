@@ -33,12 +33,10 @@ function Home() {
     const response = await api.get("/restaurants");
 
     setRestaurant({ restaurants: response.data });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [setRestaurant]);
 
   useEffect(() => {
     fetchData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fetchData]);
 
   return (

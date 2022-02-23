@@ -1,4 +1,5 @@
-import { createContext, useState } from "react";
+import { createContext, useContext, useState } from "react";
+import DishQuantityContext from "./DishQuantityContext";
 
 const ModalContext = createContext({
   state: {
@@ -19,8 +20,12 @@ function ModalProvider({ children }) {
     image: "",
     price: 9999999,
   });
+  const { setQuantity } = useContext(DishQuantityContext);
 
-  const closeModal = () => setState({ showModal: !state.showModal });
+  const closeModal = () => {
+    setQuantity(0);
+    setState({ showModal: !state.showModal });
+  };
 
   return (
     <ModalContext.Provider value={{ state, setState, closeModal }}>

@@ -52,15 +52,10 @@ const OldPrice = styled.p`
 const DishCard = ({ dish }) => {
   const { state, setState } = useContext(ModalContext);
   const { name, price, image, sales } = dish;
-  let isOnSale = false;
 
-  isOnSale = useMemo(() => {
+  const isOnSale = useMemo(() => {
     if (sales) {
-      return openHour(
-        sales[0].hours[0].from,
-        sales[0].hours[0].to,
-        sales[0].hours[0].days
-      );
+      return openHour(sales[0].hours[0].from, sales[0].hours[0].to, sales[0].hours[0].days);
     }
     return false;
   }, [sales]);

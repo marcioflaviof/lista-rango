@@ -1,7 +1,6 @@
 import { useContext } from "react";
 import reactDom from "react-dom";
 import styled from "styled-components";
-import { DishQuantityProvider } from "../../../context/DishQuantityContext";
 import ModalContext from "../../../context/ModalContext";
 import { ButtonAdd } from "../../atoms/ButtonAdd";
 import { CloseButton } from "../../atoms/CloseButton";
@@ -91,12 +90,8 @@ const ButtonsContainer = styled.div`
 `;
 
 const DishModal = () => {
-  const { state, setState } = useContext(ModalContext);
+  const { state, closeModal } = useContext(ModalContext);
   const { showModal, name, description, image, price } = state;
-
-  const closeModal = () => {
-    return setState({ showModal: !state.showModal });
-  };
 
   return reactDom.createPortal(
     <>
@@ -108,10 +103,7 @@ const DishModal = () => {
               <CloseButton />
             </Close>
             <ImageContainer>
-              <img
-                src={image || "/images/vegetarian-dish.png"}
-                alt="Imagem do prato"
-              />
+              <img src={image || "/images/vegetarian-dish.png"} alt="Imagem do prato" />
             </ImageContainer>
 
             <DetailsContainer>
@@ -124,10 +116,8 @@ const DishModal = () => {
               </Price>
             </DetailsContainer>
             <ButtonsContainer>
-              <DishQuantityProvider>
-                <Counter />
-                <ButtonAdd price={price} />
-              </DishQuantityProvider>
+              <Counter />
+              <ButtonAdd price={price} />
             </ButtonsContainer>
           </Container>
         </>
