@@ -1,6 +1,5 @@
-import { useContext } from "react";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
-import DishQuantityContext from "../../../context/DishQuantityContext";
 
 const Button = styled.button`
   display: flex;
@@ -17,7 +16,7 @@ const Button = styled.button`
 `;
 
 const ButtonAdd = ({ price }) => {
-  const { quantity } = useContext(DishQuantityContext);
+  const quantity = useSelector((state) => state.dishes.quantity);
 
   const value = (price * quantity).toFixed(2);
 

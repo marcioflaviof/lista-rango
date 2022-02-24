@@ -1,7 +1,7 @@
-import { useContext } from "react";
 import reactDom from "react-dom";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import ModalContext from "../../../context/ModalContext";
+import { reset, toggleModal } from "../../../store/actions";
 import { ButtonAdd } from "../../atoms/ButtonAdd";
 import { CloseButton } from "../../atoms/CloseButton";
 import { Counter } from "../../atoms/Counter";
@@ -90,12 +90,19 @@ const ButtonsContainer = styled.div`
 `;
 
 const DishModal = () => {
-  const { state, closeModal } = useContext(ModalContext);
-  const { showModal, name, description, image, price } = state;
+  const { name, description, image, price, show } = useSelector(
+    (state) => state.modal
+  );
+  const dispatch = useDispatch();
+
+  function closeModal() {
+    dispatch(reset());
+    dispatch(toggleModal());
+  }
 
   return reactDom.createPortal(
     <>
-      {showModal ? (
+      {show ? (
         <>
           <Background onClick={closeModal} />
           <Container>
@@ -103,7 +110,10 @@ const DishModal = () => {
               <CloseButton />
             </Close>
             <ImageContainer>
-              <img src={image || "/images/vegetarian-dish.png"} alt="Imagem do prato" />
+              <img
+                src={image || "/images/vegetarian-dish.png"}
+                alt="Imagem do prato"
+              />
             </ImageContainer>
 
             <DetailsContainer>

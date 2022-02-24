@@ -1,7 +1,8 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import RestaurantContext from "../../../context/RestaurantContext";
+import { setActiveRestaurant } from "../../../store/actions";
 import { openHour } from "../../../utils/openHour";
 import { CircleStatus } from "../CircleStatus";
 
@@ -56,7 +57,8 @@ const Address = styled.p`
 `;
 
 const RestaurantCard = ({ restaurant }) => {
-  const { setRestaurant } = useContext(RestaurantContext);
+  const dispatch = useDispatch();
+
   const [isOpen, setIsOpen] = useState(false);
 
   const { id, name, image, address, hours } = restaurant;
@@ -74,7 +76,7 @@ const RestaurantCard = ({ restaurant }) => {
   }, [hours]);
 
   function handleClick() {
-    setRestaurant({ name, image, address, hours });
+    dispatch(setActiveRestaurant({ name, image, address, hours }));
   }
 
   return (

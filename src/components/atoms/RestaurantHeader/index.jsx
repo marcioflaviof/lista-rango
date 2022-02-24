@@ -1,7 +1,8 @@
-import { useCallback, useContext, useEffect } from "react";
+import { useCallback, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { api } from "../../../config/http";
-import RestaurantContext from "../../../context/RestaurantContext";
+import { setActiveRestaurant } from "../../../store/actions";
 
 const Container = styled.div`
   display: flex;
@@ -49,15 +50,16 @@ const FitImage = styled.div`
 `;
 
 const RestaurantHeader = ({ id }) => {
-  const { restaurant, setRestaurant } = useContext(RestaurantContext);
+  const restaurant = useSelector((state) => state.restaurant.activeRestaurant);
+  const dispatch = useDispatch();
 
   const { name, image, address, hours } = restaurant;
 
   const fetchData = useCallback(async () => {
     const response = await api.get(`/restaurants/${id}`);
 
-    setRestaurant({ ...response.data });
-  }, [id, setRestaurant]);
+    dispatch(setActiveRestaurant({ ...response.data }));
+  }, [dispatch, id]);
 
   useEffect(() => {
     if (name) return;

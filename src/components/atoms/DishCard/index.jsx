@@ -1,7 +1,8 @@
-import { useContext, useMemo } from "react";
+import { useMemo } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import ModalContext from "../../../context/ModalContext";
 import { openHour } from "../../../utils/openHour";
+import { setModal } from "../../../store/actions";
 
 const Container = styled.button`
   display: flex;
@@ -50,24 +51,33 @@ const OldPrice = styled.p`
 `;
 
 const DishCard = ({ dish }) => {
-  const { state, setState } = useContext(ModalContext);
   const { name, price, image, sales } = dish;
+
+  const { show } = useSelector((state) => state.modal);
+
+  const dispatch = useDispatch();
 
   const isOnSale = useMemo(() => {
     if (sales) {
-      return openHour(sales[0].hours[0].from, sales[0].hours[0].to, sales[0].hours[0].days);
+      return openHour(
+        sales[0].hours[0].from,
+        sales[0].hours[0].to,
+        sales[0].hours[0].days
+      );
     }
     return false;
   }, [sales]);
 
-  const showDishModal = () => {
-    setState({
-      showModal: !state.showModal,
-      name,
-      image,
-      price: !isOnSale ? price : sales[0].price,
-    });
-  };
+  function showDishModal() {
+    dispatch(
+      setModal({
+        show: !show,
+        name,
+        image,
+        price: !isOnSale ? price : sales[0].price,
+      })
+    );
+  }
 
   return (
     <>

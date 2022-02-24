@@ -1,6 +1,6 @@
-import { useContext } from "react";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
-import ModalContext from "../../../context/ModalContext";
+import { reset, toggleModal } from "../../../store/actions";
 
 const Container = styled.button`
   display: flex;
@@ -22,7 +22,12 @@ const Status = styled.p`
 `;
 
 const CloseButton = () => {
-  const { closeModal } = useContext(ModalContext);
+  const dispatch = useDispatch();
+
+  function closeModal() {
+    dispatch(reset());
+    dispatch(toggleModal());
+  }
 
   return (
     <Container onClick={closeModal}>

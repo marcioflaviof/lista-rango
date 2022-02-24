@@ -1,7 +1,7 @@
-import { useContext } from "react";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { api } from "../../../config/http";
-import RestaurantContext from "../../../context/RestaurantContext";
+import { setRestaurants } from "../../../store/actions";
 
 const Input = styled.input`
   background-image: url(${(props) => props.img});
@@ -21,7 +21,7 @@ const Input = styled.input`
 `;
 
 const SearchBar = ({ placeholderText, marginTop }) => {
-  const { restaurant, setRestaurant } = useContext(RestaurantContext);
+  const dispatch = useDispatch();
 
   const handleSearch = async (event) => {
     const { value } = event.target;
@@ -29,11 +29,11 @@ const SearchBar = ({ placeholderText, marginTop }) => {
     if (value.length >= 3) {
       const response = await api.get(`/restaurants?name_like=${value}`);
 
-      setRestaurant({ ...restaurant, restaurants: response.data });
+      dispatch(setRestaurants(response.data));
     } else {
       const response = await api.get("/restaurants");
 
-      setRestaurant({ ...restaurant, restaurants: response.data });
+      dispatch(setRestaurants(response.data));
     }
   };
 

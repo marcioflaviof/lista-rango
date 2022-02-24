@@ -1,6 +1,6 @@
-import { useContext } from "react";
+import { set, increment, decrement } from "../../../store/actions";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import DishQuantityContext from "../../../context/DishQuantityContext";
 
 const Container = styled.div`
   display: flex;
@@ -30,21 +30,22 @@ const Input = styled.input`
 `;
 
 const Counter = () => {
-  const { quantity, setQuantity } = useContext(DishQuantityContext);
+  const quantity = useSelector((state) => state.dishes.quantity);
+  const dispatch = useDispatch();
 
   const handleValue = (event) => {
     const { value } = event.target;
 
-    setQuantity(value);
+    dispatch(set(value));
   };
 
   const addValue = () => {
-    setQuantity(quantity + 1);
+    dispatch(increment());
   };
 
   const subtractValue = () => {
     if (quantity <= 0) return;
-    setQuantity(quantity - 1);
+    dispatch(decrement());
   };
 
   return (

@@ -1,11 +1,12 @@
-import { Fragment, useCallback, useContext, useEffect } from "react";
+import { Fragment, useCallback, useEffect } from "react";
 import styled from "styled-components";
 
 import { FlexContainer } from "../../utils/componentStyles";
 import { SearchBar } from "../atoms/SearchBar";
 import { RestaurantCard } from "../atoms/RestaurantCard";
 import { api } from "../../config/http";
-import RestaurantContext from "../../context/RestaurantContext";
+import { useDispatch, useSelector } from "react-redux";
+import { setRestaurants } from "../../store/actions";
 
 const Container = styled(FlexContainer)`
   flex-direction: column;
@@ -25,15 +26,14 @@ const RestaurantContainer = styled.div`
 `;
 
 function Home() {
-  const { restaurant, setRestaurant } = useContext(RestaurantContext);
-
-  const { restaurants } = restaurant;
+  const restaurants = useSelector((state) => state.restaurant.restaurants);
+  const dispatch = useDispatch();
 
   const fetchData = useCallback(async () => {
     const response = await api.get("/restaurants");
 
-    setRestaurant({ restaurants: response.data });
-  }, [setRestaurant]);
+    dispatch(setRestaurants(response.data));
+  }, [dispatch]);
 
   useEffect(() => {
     fetchData();
