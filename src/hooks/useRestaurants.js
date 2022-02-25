@@ -1,10 +1,7 @@
 import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { api } from "../config/http";
-import {
-  setActiveRestaurant as actionSetRestaurant,
-  setRestaurants,
-} from "../store/actions";
+import { setActiveRestaurant as actionSetRestaurant, setRestaurants } from "../store/actions";
 import { selectRestaurants, selectActiveRestaurant } from "../store/selectors";
 
 const useRestaurants = () => {
@@ -17,7 +14,7 @@ const useRestaurants = () => {
     async (id) => {
       const response = await api.get(`/restaurants/${id}`);
 
-      dispatch(setActiveRestaurant({ ...response.data }));
+      dispatch(actionSetRestaurant({ ...response.data }));
     },
     [dispatch]
   );

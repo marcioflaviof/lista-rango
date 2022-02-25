@@ -56,15 +56,12 @@ const RestaurantHeader = ({ id }) => {
     if (name) return;
 
     fetchRestaurantData(id);
-  }, [name, fetchRestaurantData]);
+  }, [name, fetchRestaurantData, id]);
 
   return (
     <Container>
       <FitImage>
-        <img
-          src={image || "/images/restaurant-big.png"}
-          alt="Icone do restaurante"
-        />
+        <img src={image || "/images/restaurant-big.png"} alt="Icone do restaurante" />
       </FitImage>
 
       <DetailsContainer>
