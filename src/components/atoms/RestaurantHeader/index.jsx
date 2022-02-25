@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { api } from "../../../config/http";
 import { setActiveRestaurant } from "../../../store/actions";
+import { selectActiveRestaurant } from "../../../store/selectors";
 
 const Container = styled.div`
   display: flex;
@@ -50,7 +51,7 @@ const FitImage = styled.div`
 `;
 
 const RestaurantHeader = ({ id }) => {
-  const restaurant = useSelector((state) => state.restaurant.activeRestaurant);
+  const restaurant = useSelector(selectActiveRestaurant);
   const dispatch = useDispatch();
 
   const { name, image, address, hours } = restaurant;
@@ -70,7 +71,10 @@ const RestaurantHeader = ({ id }) => {
   return (
     <Container>
       <FitImage>
-        <img src={image || "/images/restaurant-big.png"} alt="Icone do restaurante" />
+        <img
+          src={image || "/images/restaurant-big.png"}
+          alt="Icone do restaurante"
+        />
       </FitImage>
 
       <DetailsContainer>

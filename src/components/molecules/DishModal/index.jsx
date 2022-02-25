@@ -2,6 +2,7 @@ import reactDom from "react-dom";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { reset, toggleModal } from "../../../store/actions";
+import { selectModal } from "../../../store/selectors";
 import { ButtonAdd } from "../../atoms/ButtonAdd";
 import { CloseButton } from "../../atoms/CloseButton";
 import { Counter } from "../../atoms/Counter";
@@ -90,9 +91,7 @@ const ButtonsContainer = styled.div`
 `;
 
 const DishModal = () => {
-  const { name, description, image, price, show } = useSelector(
-    (state) => state.modal
-  );
+  const { name, description, image, price, show } = useSelector(selectModal);
   const dispatch = useDispatch();
 
   function closeModal() {

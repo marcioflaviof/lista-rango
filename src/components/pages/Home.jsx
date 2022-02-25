@@ -7,6 +7,7 @@ import { RestaurantCard } from "../atoms/RestaurantCard";
 import { api } from "../../config/http";
 import { useDispatch, useSelector } from "react-redux";
 import { setRestaurants } from "../../store/actions";
+import { selectRestaurants } from "../../store/selectors";
 
 const Container = styled(FlexContainer)`
   flex-direction: column;
@@ -26,7 +27,7 @@ const RestaurantContainer = styled.div`
 `;
 
 function Home() {
-  const restaurants = useSelector((state) => state.restaurant.restaurants);
+  const restaurants = useSelector(selectRestaurants);
   const dispatch = useDispatch();
 
   const fetchData = useCallback(async () => {

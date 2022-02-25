@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { openHour } from "../../../utils/openHour";
 import { setModal } from "../../../store/actions";
+import { selectModal } from "../../../store/selectors";
 
 const Container = styled.button`
   display: flex;
@@ -53,7 +54,7 @@ const OldPrice = styled.p`
 const DishCard = ({ dish }) => {
   const { name, price, image, sales } = dish;
 
-  const { show } = useSelector((state) => state.modal);
+  const { show } = useSelector(selectModal);
 
   const dispatch = useDispatch();
 

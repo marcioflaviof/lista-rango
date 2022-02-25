@@ -1,4 +1,5 @@
 import { set, increment, decrement } from "../../../store/actions";
+import { selectDishesQuantity } from "../../../store/selectors";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 
@@ -30,7 +31,7 @@ const Input = styled.input`
 `;
 
 const Counter = () => {
-  const quantity = useSelector((state) => state.dishes.quantity);
+  const quantity = useSelector(selectDishesQuantity);
   const dispatch = useDispatch();
 
   const handleValue = (event) => {

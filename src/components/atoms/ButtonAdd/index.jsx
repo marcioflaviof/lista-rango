@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import styled from "styled-components";
+import { selectDishesQuantity } from "../../../store/selectors";
 
 const Button = styled.button`
   display: flex;
@@ -16,7 +17,7 @@ const Button = styled.button`
 `;
 
 const ButtonAdd = ({ price }) => {
-  const quantity = useSelector((state) => state.dishes.quantity);
+  const quantity = useSelector(selectDishesQuantity);
 
   const value = (price * quantity).toFixed(2);
 
