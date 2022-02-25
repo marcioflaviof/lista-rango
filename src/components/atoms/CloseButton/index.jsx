@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
-import { reset, toggleModal } from "../../../store/actions";
+import { resetDishCounter, toggleModal } from "../../../store/actions";
 
 const Container = styled.button`
   display: flex;
@@ -25,7 +25,7 @@ const CloseButton = () => {
   const dispatch = useDispatch();
 
   function closeModal() {
-    dispatch(reset());
+    dispatch(resetDishCounter());
     dispatch(toggleModal());
   }
 

@@ -1,9 +1,9 @@
 import { useMemo } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { openHour } from "../../../utils/openHour";
 import { setModal } from "../../../store/actions";
-import { selectModal } from "../../../store/selectors";
+import { useModal } from "../../../hooks/useModal";
 
 const Container = styled.button`
   display: flex;
@@ -54,7 +54,7 @@ const OldPrice = styled.p`
 const DishCard = ({ dish }) => {
   const { name, price, image, sales } = dish;
 
-  const { show } = useSelector(selectModal);
+  const { modal } = useModal();
 
   const dispatch = useDispatch();
 
@@ -69,16 +69,16 @@ const DishCard = ({ dish }) => {
     return false;
   }, [sales]);
 
-  function showDishModal() {
+  const showDishModal = () => {
     dispatch(
       setModal({
-        show: !show,
+        show: !modal.show,
         name,
         image,
         price: !isOnSale ? price : sales[0].price,
       })
     );
-  }
+  };
 
   return (
     <>

@@ -1,13 +1,16 @@
 // DISHES
-export const INCREMENT = "INCREMENT";
-export const DECREMENT = "DECREMENT";
-export const SET = "SET";
-export const RESET = "RESET";
+export const INCREMENT_DISH_COUNTER = "INCREMENT";
+export const DECREMENT_DISH_COUNTER = "DECREMENT";
+export const SET_DISH_COUNTER = "SET";
+export const RESET_DISH_COUNTER = "RESET";
 
-export const increment = () => ({ type: INCREMENT });
-export const decrement = () => ({ type: DECREMENT });
-export const set = (value) => ({ type: SET, payload: value });
-export const reset = () => ({ type: RESET });
+export const incrementDishCounter = () => ({ type: INCREMENT_DISH_COUNTER });
+export const decrementDishCounter = () => ({ type: DECREMENT_DISH_COUNTER });
+export const setDishCounter = (value) => ({
+  type: SET_DISH_COUNTER,
+  payload: value,
+});
+export const resetDishCounter = () => ({ type: RESET_DISH_COUNTER });
 
 // MODAL
 export const TOGGLE_MODAL = "TOGGLE_MODAL";

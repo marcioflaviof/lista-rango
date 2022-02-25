@@ -1,7 +1,11 @@
-import { set, increment, decrement } from "../../../store/actions";
-import { selectDishesQuantity } from "../../../store/selectors";
-import { useDispatch, useSelector } from "react-redux";
+import {
+  setDishCounter,
+  incrementDishCounter,
+  decrementDishCounter,
+} from "../../../store/actions";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
+import { useDishes } from "../../../hooks/useDishes";
 
 const Container = styled.div`
   display: flex;
@@ -31,28 +35,28 @@ const Input = styled.input`
 `;
 
 const Counter = () => {
-  const quantity = useSelector(selectDishesQuantity);
+  const { dishQuantity } = useDishes();
   const dispatch = useDispatch();
 
   const handleValue = (event) => {
     const { value } = event.target;
 
-    dispatch(set(value));
+    dispatch(setDishCounter(value));
   };
 
   const addValue = () => {
-    dispatch(increment());
+    dispatch(incrementDishCounter());
   };
 
   const subtractValue = () => {
-    if (quantity <= 0) return;
-    dispatch(decrement());
+    if (dishQuantity <= 0) return;
+    dispatch(decrementDishCounter());
   };
 
   return (
     <Container>
       <Button onClick={subtractValue}>-</Button>
-      <Input type="text" onChange={handleValue} value={quantity} />
+      <Input type="text" onChange={handleValue} value={dishQuantity} />
       <Button onClick={addValue}>+</Button>
     </Container>
   );

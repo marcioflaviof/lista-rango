@@ -1,11 +1,11 @@
 import reactDom from "react-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
-import { reset, toggleModal } from "../../../store/actions";
-import { selectModal } from "../../../store/selectors";
+import { resetDishCounter, toggleModal } from "../../../store/actions";
 import { ButtonAdd } from "../../atoms/ButtonAdd";
 import { CloseButton } from "../../atoms/CloseButton";
 import { Counter } from "../../atoms/Counter";
+import { useModal } from "../../../hooks/useModal";
 
 const Background = styled.div`
   position: fixed;
@@ -91,13 +91,14 @@ const ButtonsContainer = styled.div`
 `;
 
 const DishModal = () => {
-  const { name, description, image, price, show } = useSelector(selectModal);
+  const { modal } = useModal();
+  const { name, description, image, price, show } = modal;
   const dispatch = useDispatch();
 
-  function closeModal() {
-    dispatch(reset());
+  const closeModal = () => {
+    dispatch(resetDishCounter());
     dispatch(toggleModal());
-  }
+  };
 
   return reactDom.createPortal(
     <>

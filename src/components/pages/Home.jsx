@@ -5,9 +5,9 @@ import { FlexContainer } from "../../utils/componentStyles";
 import { SearchBar } from "../atoms/SearchBar";
 import { RestaurantCard } from "../atoms/RestaurantCard";
 import { api } from "../../config/http";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setRestaurants } from "../../store/actions";
-import { selectRestaurants } from "../../store/selectors";
+import { useRestaurants } from "../../hooks/useRestaurants";
 
 const Container = styled(FlexContainer)`
   flex-direction: column;
@@ -27,7 +27,7 @@ const RestaurantContainer = styled.div`
 `;
 
 function Home() {
-  const restaurants = useSelector(selectRestaurants);
+  const { restaurants } = useRestaurants();
   const dispatch = useDispatch();
 
   const fetchData = useCallback(async () => {
