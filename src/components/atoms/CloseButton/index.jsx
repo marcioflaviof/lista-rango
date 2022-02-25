@@ -1,6 +1,5 @@
-import { useDispatch } from "react-redux";
 import styled from "styled-components";
-import { resetDishCounter, toggleModal } from "../../../store/actions";
+import { useModal } from "../../../hooks/useModal";
 
 const Container = styled.button`
   display: flex;
@@ -22,12 +21,7 @@ const Status = styled.p`
 `;
 
 const CloseButton = () => {
-  const dispatch = useDispatch();
-
-  function closeModal() {
-    dispatch(resetDishCounter());
-    dispatch(toggleModal());
-  }
+  const { closeModal } = useModal();
 
   return (
     <Container onClick={closeModal}>

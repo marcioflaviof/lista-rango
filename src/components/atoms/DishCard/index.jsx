@@ -1,8 +1,6 @@
 import { useMemo } from "react";
-import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { openHour } from "../../../utils/openHour";
-import { setModal } from "../../../store/actions";
 import { useModal } from "../../../hooks/useModal";
 
 const Container = styled.button`
@@ -54,9 +52,7 @@ const OldPrice = styled.p`
 const DishCard = ({ dish }) => {
   const { name, price, image, sales } = dish;
 
-  const { modal } = useModal();
-
-  const dispatch = useDispatch();
+  const { showDishModal } = useModal();
 
   const isOnSale = useMemo(() => {
     if (sales) {
@@ -69,20 +65,11 @@ const DishCard = ({ dish }) => {
     return false;
   }, [sales]);
 
-  const showDishModal = () => {
-    dispatch(
-      setModal({
-        show: !modal.show,
-        name,
-        image,
-        price: !isOnSale ? price : sales[0].price,
-      })
-    );
-  };
-
   return (
     <>
-      <Container onClick={showDishModal}>
+      <Container
+        onClick={() => showDishModal(name, image, price, isOnSale, sales[0])}
+      >
         <ImageContainer>
           <img src={image || "/images/dish.png"} alt="Imagem do prato" />
         </ImageContainer>

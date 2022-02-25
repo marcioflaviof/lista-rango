@@ -1,7 +1,5 @@
 import reactDom from "react-dom";
-import { useDispatch } from "react-redux";
 import styled from "styled-components";
-import { resetDishCounter, toggleModal } from "../../../store/actions";
 import { ButtonAdd } from "../../atoms/ButtonAdd";
 import { CloseButton } from "../../atoms/CloseButton";
 import { Counter } from "../../atoms/Counter";
@@ -91,14 +89,8 @@ const ButtonsContainer = styled.div`
 `;
 
 const DishModal = () => {
-  const { modal } = useModal();
+  const { modal, closeModal } = useModal();
   const { name, description, image, price, show } = modal;
-  const dispatch = useDispatch();
-
-  const closeModal = () => {
-    dispatch(resetDishCounter());
-    dispatch(toggleModal());
-  };
 
   return reactDom.createPortal(
     <>

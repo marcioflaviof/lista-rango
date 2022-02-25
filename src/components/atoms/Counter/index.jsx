@@ -1,9 +1,3 @@
-import {
-  setDishCounter,
-  incrementDishCounter,
-  decrementDishCounter,
-} from "../../../store/actions";
-import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { useDishes } from "../../../hooks/useDishes";
 
@@ -35,23 +29,7 @@ const Input = styled.input`
 `;
 
 const Counter = () => {
-  const { dishQuantity } = useDishes();
-  const dispatch = useDispatch();
-
-  const handleValue = (event) => {
-    const { value } = event.target;
-
-    dispatch(setDishCounter(value));
-  };
-
-  const addValue = () => {
-    dispatch(incrementDishCounter());
-  };
-
-  const subtractValue = () => {
-    if (dishQuantity <= 0) return;
-    dispatch(decrementDishCounter());
-  };
+  const { dishQuantity, handleValue, addValue, subtractValue } = useDishes();
 
   return (
     <Container>
