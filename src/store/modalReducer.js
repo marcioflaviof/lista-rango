@@ -11,7 +11,7 @@ const initialState = {
 export const modalReducer = (state = initialState, action) => {
   switch (action.type) {
     case TOGGLE_MODAL:
-      return { show: !state.show };
+      return { ...state, show: !state.show };
 
     case SET_MODAL:
       return { ...state, ...action.payload };
