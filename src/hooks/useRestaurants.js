@@ -32,8 +32,6 @@ const useRestaurants = () => {
         response = await api.get("/restaurants");
       }
 
-      console.log(response.data);
-
       dispatch(setRestaurants(response.data));
     },
     [dispatch]
