@@ -50,5 +50,4 @@ const useRestaurants = () => {
     setActiveRestaurant,
   };
 };
-
 export { useRestaurants };
