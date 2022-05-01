@@ -1,16 +1,17 @@
+import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import { Nav } from "./components/atoms/Nav";
-import GlobalContext from "./context/index";
 import Routes from "./routes";
+import { store } from "./store";
 
 function App() {
   return (
-    <BrowserRouter>
-      <Nav />
-      <GlobalContext>
+    <Provider store={store}>
+      <BrowserRouter>
+        <Nav />
         <Routes />
-      </GlobalContext>
-    </BrowserRouter>
+      </BrowserRouter>
+    </Provider>
   );
 }
 

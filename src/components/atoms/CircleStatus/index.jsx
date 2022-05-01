@@ -18,7 +18,7 @@ const Status = styled.p`
   color: var(--white);
 `;
 
-const CircleStatus = ({ status }) => {
+const CircleStatus = ({ status = false }) => {
   return (
     <Container status={status}>
       <Status>{status ? "Aberto agora" : "Fechado"}</Status>

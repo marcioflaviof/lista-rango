@@ -1,7 +1,7 @@
-import { useContext, useMemo } from "react";
+import { useMemo } from "react";
 import styled from "styled-components";
-import ModalContext from "../../../context/ModalContext";
 import { openHour } from "../../../utils/openHour";
+import { useModal } from "../../../hooks/useModal";
 
 const Container = styled.button`
   display: flex;
@@ -50,28 +50,26 @@ const OldPrice = styled.p`
 `;
 
 const DishCard = ({ dish }) => {
-  const { state, setState } = useContext(ModalContext);
   const { name, price, image, sales } = dish;
+
+  const { showDishModal } = useModal();
 
   const isOnSale = useMemo(() => {
     if (sales) {
-      return openHour(sales[0].hours[0].from, sales[0].hours[0].to, sales[0].hours[0].days);
+      return openHour(
+        sales[0].hours[0].from,
+        sales[0].hours[0].to,
+        sales[0].hours[0].days
+      );
     }
     return false;
   }, [sales]);
 
-  const showDishModal = () => {
-    setState({
-      showModal: !state.showModal,
-      name,
-      image,
-      price: !isOnSale ? price : sales[0].price,
-    });
-  };
-
   return (
     <>
-      <Container onClick={showDishModal}>
+      <Container
+        onClick={() => showDishModal(name, image, price, isOnSale, sales[0])}
+      >
         <ImageContainer>
           <img src={image || "/images/dish.png"} alt="Imagem do prato" />
         </ImageContainer>
